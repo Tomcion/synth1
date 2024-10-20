@@ -1,0 +1,24 @@
+﻿  main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\tymon\synth\imgui\examples\libs\glfw\include\GLFW\glfw3.h(98,1): message : see previous definition of 'APIENTRY'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(97,10): warning C4189: 'show_demo_window': local variable is initialized but not referenced
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(98,10): warning C4189: 'show_another_window': local variable is initialized but not referenced
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(164,36): warning C4100: 'dTime': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(164,17): message : while compiling class template member function 'double olcNoiseMaker<short>::UserProcess(double)'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(103,68): message : see reference to class template instantiation 'olcNoiseMaker<short>' being compiled
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(106,18): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(86,7): message : while compiling class template member function 'bool olcNoiseMaker<short>::Create(std::string,unsigned int,unsigned int,unsigned int,unsigned int)'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(78,9): message : see the first reference to 'olcNoiseMaker<short>::Create' in 'olcNoiseMaker<short>::olcNoiseMaker'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(108,28): message : see the first reference to 'olcNoiseMaker<short>::olcNoiseMaker' in 'main'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(111,27): warning C4244: '=': conversion from 'unsigned int' to 'WORD', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(222,71): warning C4100: 'dwParam2': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(222,7): message : while compiling class template member function 'void olcNoiseMaker<short>::waveOutProc(HWAVEOUT,UINT,DWORD,DWORD)'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(234,44): message : see the first reference to 'olcNoiseMaker<short>::waveOutProc' in 'olcNoiseMaker<short>::waveOutProcWrap'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(119,4): message : see the first reference to 'olcNoiseMaker<short>::waveOutProcWrap' in 'olcNoiseMaker<short>::Create'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(78,9): message : see the first reference to 'olcNoiseMaker<short>::Create' in 'olcNoiseMaker<short>::olcNoiseMaker'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(108,28): message : see the first reference to 'olcNoiseMaker<short>::olcNoiseMaker' in 'main'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(222,55): warning C4100: 'dwParam1': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(222,28): warning C4100: 'hWaveOut': unreferenced formal parameter
+  MasterWindow.cpp
+  Generating Code...
+  example_glfw_opengl3.vcxproj -> C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\example_glfw_opengl3.exe
