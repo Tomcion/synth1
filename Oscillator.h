@@ -19,6 +19,13 @@ protected:
     OscillatorType type;
 
 private: 
+    double PI = 3.14159;
+
+    double ToRad(double n)
+    {
+        return n * 2.0 * PI;
+    }
+
     double SineWave(double time)
     {
         double output = sin(freq * time);
@@ -27,13 +34,13 @@ private:
 
     double TriangleWave(double time)
     {
-        double output = sin(freq * time);
+        double output = (2.0f / PI) * asin(sin(freq * time));
         return output * level;
     }
 
     double SquareWave(double time)
     {
-        double output = sin(freq * time);
+        double output = (sin(freq * time) > 0 ? 1.0f : -1.0f);
         return output * level;
     }
 
@@ -57,12 +64,12 @@ public:
         this->level = 0.5f;
         this->octave = 3;
         this->detune = 0.0f;
-        this->type = SINE;
+        this->type = TRIANGLE;
     }
 
     void SetOscFrequencyRad(double frequency)
     {
-        this->freq = frequency * pow(2, octave) * 2.0 * 3.14159;
+        this->freq = ToRad(frequency * pow(2, octave));
     }
  
     double ProduceWave(double time)
@@ -129,6 +136,7 @@ public:
         {
             output += oscs[i].ProduceWave(time);
         }
+        return output;
     }
 };
  

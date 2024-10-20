@@ -87,6 +87,9 @@
     <ClInclude Include="LFO.h">
       <Filter>sources</Filter>
     </ClInclude>
+    <ClInclude Include="olcNoiseMakerOld.h">
+      <Filter>sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />

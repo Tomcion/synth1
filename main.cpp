@@ -106,7 +106,11 @@ int main(int, char**)
 	std::cout << "Using Device: " << devices[0] << std::endl;
 
 	olcNoiseMaker<short> sound(devices[0], 44100, 1, 8, 512);
-    sound.SetUserFunction(SineWave);
+    //sound.SetUserFunction(SineWave);
+ 
+    sound.SetUserFunction([&] (double time) -> double {
+            return masterWindow.MixSound(time);
+    });
 
     bool notePressed = false;
     int currentNote = -1;

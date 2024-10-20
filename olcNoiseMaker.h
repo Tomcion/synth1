@@ -63,6 +63,7 @@
 #include <thread>
 #include <atomic>
 #include <condition_variable>
+#include <functional>
 using namespace std;
 
 #include <Windows.h>
@@ -183,7 +184,8 @@ public:
 		return sDevices;
 	}
 
-	void SetUserFunction(double(*func)(double))
+	//void SetUserFunction(double(*func)(double))
+	void SetUserFunction(std::function<double(double)> func)
 	{
 		m_userFunction = func;
 	}
@@ -198,7 +200,8 @@ public:
 
 
 private:
-	double(*m_userFunction)(double);
+	//double(*m_userFunction)(double);
+	std::function<double(double)> m_userFunction; 
 
 	unsigned int m_nSampleRate;
 	unsigned int m_nChannels;

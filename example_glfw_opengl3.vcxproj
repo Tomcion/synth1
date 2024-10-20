@@ -184,6 +184,7 @@
     <ClInclude Include="LFO.h" />
     <ClInclude Include="MasterWindow.h" />
     <ClInclude Include="olcNoiseMaker.h" />
+    <ClInclude Include="olcNoiseMakerOld.h" />
     <ClInclude Include="Oscillator.h" />
     <ClInclude Include="WindowSection.h" />
   </ItemGroup>
