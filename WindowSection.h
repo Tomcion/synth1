@@ -1,5 +1,6 @@
 #pragma once 
 #include "imgui.h"
+#include "imgui-knobs.h"
 #include <string>
 
 class WindowSection {

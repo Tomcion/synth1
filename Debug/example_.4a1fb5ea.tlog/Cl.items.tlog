@@ -6,6 +6,7 @@ C:\Users\tymon\synth\imgui\imgui_widgets.cpp;C:\Users\tymon\synth\imgui\examples
 C:\Users\tymon\synth\imgui\backends\imgui_impl_glfw.cpp;C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\imgui_impl_glfw.obj
 C:\Users\tymon\synth\imgui\backends\imgui_impl_opengl3.cpp;C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\imgui_impl_opengl3.obj
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp;C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\Envelope.obj
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\imgui-knobs.cpp;C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\imgui-knobs.obj
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.cpp;C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\LFO.obj
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp;C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\main.obj
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\MasterWindow.cpp;C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\MasterWindow.obj

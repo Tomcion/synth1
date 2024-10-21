@@ -49,6 +49,9 @@
     <ClCompile Include="Envelope.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="imgui-knobs.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imconfig.h">
@@ -89,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="olcNoiseMakerOld.h">
       <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-knobs.h">
+      <Filter>imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

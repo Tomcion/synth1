@@ -1,21 +1,28 @@
 #pragma once
 #include "WindowSection.h"
 #include <vector>
+#include <string>
 #include <atomic>
+
+enum OscillatorType {
+    SINE = 0,
+    TRIANGLE,
+    SQUARE,
+    SAWTOOTH,
+    NOISE
+};
 
 class Oscillator {
 protected:
-    enum OscillatorType {
-        SINE,
-        TRIANGLE,
-        SQUARE,
-        SAWTOOTH,
-        NOISE
-    };
+    char oscNumber;
+    std::string windowName;
     double freq;
-    double level;
-    double detune;
-    int octave; 
+    int MAX_OCTAVE = 5;
+    double halfToneRatio = pow(2.0, 1.0 / 12.0);
+
+    float level;
+    float detune;
+    int octave;
     OscillatorType type;
 
 private: 
@@ -29,47 +36,60 @@ private:
     double SineWave(double time)
     {
         double output = sin(freq * time);
-        return output * level;
+        return output * (double)level;
     }
 
     double TriangleWave(double time)
     {
         double output = (2.0f / PI) * asin(sin(freq * time));
-        return output * level;
+        return output * (double)level;
     }
 
     double SquareWave(double time)
     {
         double output = (sin(freq * time) > 0 ? 1.0f : -1.0f);
-        return output * level;
+        return output * (double)level;
     }
 
     double SawtoothWave(double time)
     {
         double output = sin(freq * time);
-        return output * level;
+        return output * (double)level;
     } 
 
     double WhiteNoise(double time)
     {
         double output = sin(freq * time);
-        return output * level;
+        return output * (double)level;
     } 
 
  
 public:
-    Oscillator()
+    Oscillator(char pOscNumber, OscillatorType pType, float pLevel, int pOctave, float pDetune)
     {
         this->freq = 0.0f;
-        this->level = 0.5f;
-        this->octave = 3;
-        this->detune = 0.0f;
-        this->type = TRIANGLE;
+        this->level = pLevel;
+        this->octave = pOctave;
+        this->detune = pDetune;
+        this->type = pType;
+        this->SetNumber(pOscNumber);
+    }
+
+    void SetNumber(char num)
+    {
+        this->oscNumber = num;
+        windowName = "Oscillator " + std::to_string(num);
+    }
+
+    int GetNumber()
+    {
+        return this->oscNumber;
     }
 
     void SetOscFrequencyRad(double frequency)
     {
-        this->freq = ToRad(frequency * pow(2, octave));
+        double detune_bound = frequency * halfToneRatio - frequency;
+        this->freq = ToRad(frequency * pow(2, octave)) + (this->detune) * detune_bound;
     }
  
     double ProduceWave(double time)
@@ -88,30 +108,53 @@ public:
             return WhiteNoise(time);
         }
     }
+
+    void RenderOsc()
+    {
+        ImGui::Begin(windowName.c_str());
+        const char* items[3] = { "Sine", "Triangle", "Square" };
+        int selected_item = type;
+        if (ImGui::Combo("Waveform", &selected_item, items, 3))
+            type = (OscillatorType)selected_item;
+
+        ImGuiKnobs::Knob("Level", &(this->level),
+            0.0f, 1.0f, 0.01f, "%.2f", ImGuiKnobVariant_Wiper,
+            0.0f, ImGuiKnobFlags_DragVertical);
+        ImGui::SameLine();
+        ImGuiKnobs::KnobInt("Octave", &(this->octave),
+            0, MAX_OCTAVE, 0.1f, "%i", ImGuiKnobVariant_Stepped,
+            0, ImGuiKnobFlags_DragVertical, MAX_OCTAVE + 1); 
+        ImGui::SameLine();
+        ImGuiKnobs::Knob("Detune", &(this->detune),
+            -1.0f, 1.0, 0.01f, "%.2f", ImGuiKnobVariant_Wiper,
+            0.0f, ImGuiKnobFlags_DragVertical);
+        ImGui::End();;
+    }
 };
 
 class OscillatorsWindow : public RegularWindow {
 private:
+    double lowest_octave = 55.0;
+    double halfToneRatio = pow(2.0, 1.0 / 12.0);
     std::vector<Oscillator> oscs;
     double note_freq;
-    double lowest_octave;
-    double halfToneRatio;
  
     virtual void RenderElements()
     {
-        ImGui::Text("lalalla osc");
+        for (int i = 0; i < oscs.size(); i++)
+            oscs[i].RenderOsc();
     }
 public:
     OscillatorsWindow()
-    {
-        lowest_octave = 55.0;
-        halfToneRatio = pow(2.0, 1.0 / 12.0);
-
+    { 
         this->name = "Oscillators";
         this->note_freq = 0.0f;
 
-        Oscillator osc1;
+        Oscillator osc1(1, TRIANGLE, 0.5f, 2, 0.0f);
         this->oscs.push_back(osc1);
+
+        Oscillator osc2(2, SQUARE, 0.1f, 3, 0.0f);
+        this->oscs.push_back(osc2);
     }
 
     void SetNoteFrequency(int note)
@@ -134,9 +177,9 @@ public:
         double output = 0.0;
         for (int i = 0; i < oscs.size(); i++)
         {
-            output += oscs[i].ProduceWave(time);
+            output += this->oscs[i].ProduceWave(time);
         }
         return output;
-    }
+    } 
 };
  
