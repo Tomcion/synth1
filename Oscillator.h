@@ -36,6 +36,7 @@ private:
     double SineWave(double time)
     {
         double output = sin(freq * time);
+        //double output = sin(freq * time + 0.01 * freq * sin(ToRad(2.0) * time));
         return output * (double)level;
     }
 
@@ -53,7 +54,7 @@ private:
 
     double SawtoothWave(double time)
     {
-        double output = sin(freq * time);
+        double output = (2.0f / PI) * (freq * PI * fmod(time, 1.0 / freq) - (PI / 2.0));
         return output * (double)level;
     } 
 
@@ -86,14 +87,20 @@ public:
         return this->oscNumber;
     }
 
+    void ApplyDetune(double time)
+    { 
+        freq += pow(2, halfToneRatio * this->detune);
+        //freq += 0.01 * freq * sin(ToRad(2.0) * time);
+    }
+
     void SetOscFrequencyRad(double frequency)
     {
-        double detune_bound = frequency * halfToneRatio - frequency;
-        this->freq = ToRad(frequency * pow(2, octave)) + (this->detune) * detune_bound;
+        this->freq = ToRad(frequency * pow(2, octave));
     }
  
     double ProduceWave(double time)
     {
+        ApplyDetune(time);
         switch (this->type)
         {
         case SINE:
@@ -107,14 +114,15 @@ public:
         case NOISE:
             return WhiteNoise(time);
         }
+
     }
 
     void RenderOsc()
     {
         ImGui::Begin(windowName.c_str());
-        const char* items[3] = { "Sine", "Triangle", "Square" };
+        const char* items[4] = { "Sine", "Triangle", "Square", "Sawtooth"};
         int selected_item = type;
-        if (ImGui::Combo("Waveform", &selected_item, items, 3))
+        if (ImGui::Combo("Waveform", &selected_item, items, 4))
             type = (OscillatorType)selected_item;
 
         ImGuiKnobs::Knob("Level", &(this->level),
