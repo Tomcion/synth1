@@ -172,6 +172,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterWindow.cpp" />
     <ClCompile Include="Oscillator.cpp" />
+    <ClCompile Include="WaveGenerator.cpp" />
     <ClCompile Include="WindowSection.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="olcNoiseMaker.h" />
     <ClInclude Include="olcNoiseMakerOld.h" />
     <ClInclude Include="Oscillator.h" />
+    <ClInclude Include="WaveGenerator.h" />
     <ClInclude Include="WindowSection.h" />
   </ItemGroup>
   <ItemGroup>

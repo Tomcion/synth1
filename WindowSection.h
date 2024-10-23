@@ -12,7 +12,9 @@ public:
         return this->name;
     }
 
-    virtual void RenderWindow() = 0;
+    virtual void RenderWindow()
+    {
+    }
 };
 
 class RegularWindow : public WindowSection {

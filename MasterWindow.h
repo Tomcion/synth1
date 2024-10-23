@@ -14,6 +14,18 @@ public:
     MasterWindow()
     {
         this->name = "Master Window";
+
+        Oscillator osc1(1, TRIANGLE, 0.5f, 2);
+        oscillatorsWindow.AddOscillator(osc1);
+
+        Oscillator osc2(2, SQUARE, 0.1f, 3);
+        oscillatorsWindow.AddOscillator(osc2);
+
+        LFO lfo1(1, SINE, 0.5f);
+        lfosWindow.AddLFO(lfo1);
+
+        LFO lfo2(2, SINE, 0.5f);
+        lfosWindow.AddLFO(lfo2);
     }
 
     virtual void RenderWindow()

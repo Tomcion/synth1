@@ -52,6 +52,9 @@
     <ClCompile Include="imgui-knobs.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="WaveGenerator.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imconfig.h">
@@ -95,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="imgui-knobs.h">
       <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveGenerator.h">
+      <Filter>sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

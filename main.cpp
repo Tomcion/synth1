@@ -29,12 +29,6 @@ static void glfw_error_callback(int error, const char* description)
 {
     fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
- 
-double SineWave(double time)
-{
-    double output = sin(440 * 2.0 * 3.14159 * time);
-    return output * 0.5;
-}
 
 // Main code
 int main(int, char**)
