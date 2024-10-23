@@ -20,45 +20,44 @@ protected:
     int MAX_OCTAVE = 5;
     double halfToneRatio = pow(2.0, 1.0 / 12.0);
 
-    float level;
-    float detune;
+    float detune; 
+    float level; 
     int octave;
     OscillatorType type;
 
-private: 
     double PI = 3.14159;
 
-    double ToRad(double n)
+    const double ToRad(double n)
     {
         return n * 2.0 * PI;
     }
 
-    double SineWave(double time)
+    const double SineWave(double time)
     {
         double output = sin(freq * time);
         //double output = sin(freq * time + 0.01 * freq * sin(ToRad(2.0) * time));
         return output * (double)level;
     }
 
-    double TriangleWave(double time)
+    const double TriangleWave(double time)
     {
         double output = (2.0f / PI) * asin(sin(freq * time));
         return output * (double)level;
     }
 
-    double SquareWave(double time)
+    const double SquareWave(double time)
     {
         double output = (sin(freq * time) > 0 ? 1.0f : -1.0f);
         return output * (double)level;
     }
 
-    double SawtoothWave(double time)
+    const double SawtoothWave(double time)
     {
         double output = (2.0f / PI) * (freq * PI * fmod(time, 1.0 / freq) - (PI / 2.0));
         return output * (double)level;
     } 
 
-    double WhiteNoise(double time)
+    const double WhiteNoise(double time)
     {
         double output = sin(freq * time);
         return output * (double)level;
@@ -82,25 +81,24 @@ public:
         windowName = "Oscillator " + std::to_string(num);
     }
 
-    int GetNumber()
+    const int GetNumber()
     {
         return this->oscNumber;
     }
 
-    void ApplyDetune(double time)
-    { 
-        freq += pow(2, halfToneRatio * this->detune);
-        //freq += 0.01 * freq * sin(ToRad(2.0) * time);
+    const void ApplyDetune(double* note_freq)
+    {
+        *note_freq = *note_freq * pow(2.0f, this->detune / 12.0f);
     }
 
     void SetOscFrequencyRad(double frequency)
     {
+        ApplyDetune(&frequency); 
         this->freq = ToRad(frequency * pow(2, octave));
     }
  
-    double ProduceWave(double time)
+    const double ProduceWave(double time)
     {
-        ApplyDetune(time);
         switch (this->type)
         {
         case SINE:
