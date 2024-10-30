@@ -3,6 +3,7 @@
 #include "olcNoiseMaker.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 const double halfToneRatio = pow(2.0, 1.0 / 12.0);
 

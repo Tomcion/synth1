@@ -1,10 +1,15 @@
 #pragma once
 #include "WaveGenerator.h"
+#include <iostream>
 
 class ParameterAutomator {
 protected:
     float* target;
 public:
+    ParameterAutomator(float* target)
+        : target(target)
+    {
+    }
 
     void SetTarget(float *pTarget)
     {
@@ -18,19 +23,18 @@ class LFO : public WaveGenerator, public ParameterAutomator {
 private:
     char id;
     std::string windowName;
-    float* target;
 
-    float temp_freq;
+    float freq_hz;
 
 public:
-    LFO(char id, WaveType type, float amplitude)
-        : WaveGenerator(type, amplitude, 0.0f)
+    LFO(char id, WaveType type, float amplitude, float freq_hz, float* target)
+        : ParameterAutomator(target), WaveGenerator(type, amplitude, 0.0f), freq_hz(freq_hz)
     {
-        this->freq = 1;
-        this->target = nullptr;
+        this->freq = ToRad(freq_hz);
+        this->amplitude *= 0.001f;
         this->SetId(id);
     }
-
+ 
     void SetId(char num)
     {
         this->id = num;
@@ -45,7 +49,10 @@ public:
     virtual void ApplyAutomation(double time)
     {
         if (this->target == nullptr)
+        {
             return;
+        }
+        this->freq = ToRad((double)(this->freq_hz));
         *(this->target) += ProduceWave(time); 
     }
  
@@ -60,15 +67,11 @@ public:
         ImGuiKnobs::Knob("Amount", &(this->amplitude),
             0.0f, 1.0f, 0.01f, "%.2f", ImGuiKnobVariant_Wiper,
             0.0f, ImGuiKnobFlags_DragVertical);
-        ImGui::SameLine();
+        ImGui::SameLine(); 
 
-        this->temp_freq = (float)this->freq;
-        if (ImGuiKnobs::Knob("Freq.", &(this->temp_freq),
+        ImGuiKnobs::Knob("Freq.", &(this->freq_hz),
             0.1, 20, 0.1f, "%.2f", ImGuiKnobVariant_Wiper,
-            0.0f, ImGuiKnobFlags_DragVertical))
-        {
-            this->freq = (double)(this->temp_freq);
-        }
+            0.0f, ImGuiKnobFlags_DragVertical);
 
         ImGui::End();
     } 
@@ -76,13 +79,13 @@ public:
  
 class LFOsWindow : public WindowSection {
 private:
-    std::vector<LFO> lfos;
+    std::vector<LFO*> lfos;
 
 public: 
     virtual void RenderWindow()
     {
         for (int i = 0; i < lfos.size(); i++)
-            lfos[i].RenderLFO();
+            lfos[i]->RenderLFO();
     }
 
     LFOsWindow()
@@ -90,7 +93,13 @@ public:
         this->name = "LFOs"; 
     } 
 
-    void AddLFO(LFO lfo)
+    ~LFOsWindow()
+    { 
+        for (int i = 0; i < lfos.size(); i++)
+            delete[] lfos[i];
+    } 
+
+    void AddLFO(LFO* lfo)
     {
         lfos.push_back(lfo);
     }
@@ -98,6 +107,6 @@ public:
     void UpdateLFOs(double time)
     {
         for (int i = 0; i < lfos.size(); i++)
-            lfos[i].ApplyAutomation(time);
+            lfos[i]->ApplyAutomation(time);
     }
 };

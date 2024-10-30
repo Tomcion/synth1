@@ -61,19 +61,27 @@ public:
             0.0f, ImGuiKnobFlags_DragVertical);
         ImGui::End();;
     }
+
+    float* GetModPointer()
+    {
+        return &(this->detune);
+    }
+
+    friend class ParameterAutomator;
+    friend class LFO;
 };
 
 class OscillatorsWindow : public WindowSection {
 private:
     double lowest_octave = 55.0;
-    std::vector<Oscillator> oscs;
+    std::vector<Oscillator*> oscs;
     double note_freq;
  
 public:
     virtual void RenderWindow()
     {
         for (int i = 0; i < oscs.size(); i++)
-            oscs[i].RenderOsc();
+            oscs[i]->RenderOsc();
     }
 
     OscillatorsWindow()
@@ -82,7 +90,14 @@ public:
         this->note_freq = 0.0f; 
     }
 
-    void AddOscillator(Oscillator osc)
+    ~OscillatorsWindow()
+    { 
+        for (int i = 0; i < oscs.size(); i++)
+            delete[] oscs[i];
+    } 
+
+
+    void AddOscillator(Oscillator* osc)
     {
         oscs.push_back(osc);
     }
@@ -98,7 +113,7 @@ public:
 
         for (int i = 0; i < oscs.size(); i++)
         {
-            oscs[i].SetOscFrequencyRad(note_freq);
+            oscs[i]->SetOscFrequencyRad(note_freq);
         }
     }
 
@@ -107,7 +122,7 @@ public:
         double output = 0.0;
         for (int i = 0; i < oscs.size(); i++)
         {
-            output += this->oscs[i].ProduceWave(time);
+            output += (this->oscs[i])->ProduceWave(time);
         }
         return output;
     } 

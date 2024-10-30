@@ -15,33 +15,36 @@ public:
     {
         this->name = "Master Window";
 
-        Oscillator osc1(1, TRIANGLE, 0.5f, 2);
+        Oscillator* osc1 = new Oscillator(1, TRIANGLE, 0.5f, 2);
         oscillatorsWindow.AddOscillator(osc1);
 
-        Oscillator osc2(2, SQUARE, 0.1f, 3);
+        Oscillator* osc2 = new Oscillator(2, SQUARE, 0.1f, 3);
         oscillatorsWindow.AddOscillator(osc2);
-
-        LFO lfo1(1, SINE, 0.5f);
+ 
+        LFO* lfo1 = new LFO(1, SINE, 0.5f, 1.0f, osc1->GetModPointer()); 
         lfosWindow.AddLFO(lfo1);
+        //lfo1->SetTarget(osc1->GetModPointer());
 
-        LFO lfo2(2, SINE, 0.5f);
+        LFO* lfo2 = new LFO(2, SINE, 0.5f, 1.0f, osc2->GetModPointer());
         lfosWindow.AddLFO(lfo2);
+        //lfo2->SetTarget(osc2->GetModPointer());
     }
 
     virtual void RenderWindow()
     {
-         ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
-         oscillatorsWindow.RenderWindow();
-         envelopesWindow.RenderWindow();
-         lfosWindow.RenderWindow();
+        ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
+        oscillatorsWindow.RenderWindow();
+        envelopesWindow.RenderWindow();
+        lfosWindow.RenderWindow();
     }
 
     double MixSound(double time)
     {
+        lfosWindow.UpdateLFOs(time);
         double output = oscillatorsWindow.MixOscillators(time);
         return output;
     }
-
+ 
     void ProcessNotes(bool& notePressed, int currentNote)
     {
 		notePressed = false;
