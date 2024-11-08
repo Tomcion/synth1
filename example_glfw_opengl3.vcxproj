@@ -171,7 +171,9 @@
     <ClCompile Include="LFO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterWindow.cpp" />
+    <ClCompile Include="ModulableField.cpp" />
     <ClCompile Include="Oscillator.cpp" />
+    <ClCompile Include="ParameterAutomator.cpp" />
     <ClCompile Include="WaveGenerator.cpp" />
     <ClCompile Include="WindowSection.cpp" />
   </ItemGroup>
@@ -186,9 +188,11 @@
     <ClInclude Include="imgui-knobs.h" />
     <ClInclude Include="LFO.h" />
     <ClInclude Include="MasterWindow.h" />
+    <ClInclude Include="ModulableField.h" />
     <ClInclude Include="olcNoiseMaker.h" />
     <ClInclude Include="olcNoiseMakerOld.h" />
     <ClInclude Include="Oscillator.h" />
+    <ClInclude Include="ParameterAutomator.h" />
     <ClInclude Include="WaveGenerator.h" />
     <ClInclude Include="WindowSection.h" />
   </ItemGroup>

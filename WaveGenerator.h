@@ -18,9 +18,13 @@ enum WaveType {
 class WaveGenerator {
 protected:
     WaveType type;
-    float amplitude; 
-    double freq;
 
+    float raw_amplitude;
+    float amplitude; 
+
+    double raw_freq;
+    double freq;
+ 
     const double ToRad(double n)
     {
         return n * 2.0 * PI;
@@ -57,14 +61,23 @@ protected:
         return output * (double)amplitude;
     } 
 
+    virtual void UpdateParameters(double time)
+    {
+        return;
+    }
+
 public: 
     WaveGenerator(WaveType type = SINE, float amplitude = 0.3f, float freq = 0.0f)
-        : type(type), amplitude(amplitude), freq(freq)
+        : type(type),
+          amplitude(amplitude), raw_amplitude(amplitude),
+          freq(freq), raw_freq(freq)
     {
     } 
 
     const double ProduceWave(double time)
     {
+        UpdateParameters(time);
+
         switch (this->type)
         {
         case SINE:

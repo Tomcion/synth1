@@ -21,13 +21,13 @@ public:
         Oscillator* osc2 = new Oscillator(2, SQUARE, 0.1f, 3);
         oscillatorsWindow.AddOscillator(osc2);
  
-        LFO* lfo1 = new LFO(1, SINE, 0.5f, 1.0f, osc1->GetModPointer()); 
+        LFO* lfo1 = new LFO(1, SINE, 0.5f, 1.0f); 
         lfosWindow.AddLFO(lfo1);
-        //lfo1->SetTarget(osc1->GetModPointer());
 
-        LFO* lfo2 = new LFO(2, SINE, 0.5f, 1.0f, osc2->GetModPointer());
+        LFO* lfo2 = new LFO(2, SINE, 0.5f, 1.0f);
         lfosWindow.AddLFO(lfo2);
-        //lfo2->SetTarget(osc2->GetModPointer());
+
+        //osc1->AddAutomatorDetune(lfo1);
     }
 
     virtual void RenderWindow()
@@ -40,7 +40,6 @@ public:
 
     double MixSound(double time)
     {
-        lfosWindow.UpdateLFOs(time);
         double output = oscillatorsWindow.MixOscillators(time);
         return output;
     }

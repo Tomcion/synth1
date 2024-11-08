@@ -1,11 +1,26 @@
-﻿  MasterWindow.cpp
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(56,39): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(73,13): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  LFO.cpp
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\WaveGenerator.h(64,42): warning C4100: 'time': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(35,27): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(52,13): warning C4305: 'argument': truncation from 'double' to 'float'
+  MasterWindow.cpp
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\WaveGenerator.h(64,42): warning C4100: 'time': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(35,27): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(52,13): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Oscillator.h(52,42): warning C4100: 'time': unreferenced formal parameter
+  Oscillator.cpp
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\WaveGenerator.h(64,42): warning C4100: 'time': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(35,27): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(52,13): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Oscillator.h(52,42): warning C4100: 'time': unreferenced formal parameter
+  WaveGenerator.cpp
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\WaveGenerator.h(64,42): warning C4100: 'time': unreferenced formal parameter
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\tymon\synth\imgui\examples\libs\glfw\include\GLFW\glfw3.h(98,1): message : see previous definition of 'APIENTRY'
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(56,39): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(73,13): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\WaveGenerator.h(64,42): warning C4100: 'time': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(35,27): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\LFO.h(52,13): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Oscillator.h(52,42): warning C4100: 'time': unreferenced formal parameter
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(92,10): warning C4189: 'show_demo_window': local variable is initialized but not referenced
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(93,10): warning C4189: 'show_another_window': local variable is initialized but not referenced
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(165,36): warning C4100: 'dTime': unreferenced formal parameter
@@ -25,5 +40,5 @@ C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\main.cpp(103,28): messa
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(225,55): warning C4100: 'dwParam1': unreferenced formal parameter
 C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\olcNoiseMaker.h(225,28): warning C4100: 'hWaveOut': unreferenced formal parameter
   Generating Code...
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\WaveGenerator.h(81): warning C4715: 'WaveGenerator::ProduceWave': not all control paths return a value
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\WaveGenerator.h(94): warning C4715: 'WaveGenerator::ProduceWave': not all control paths return a value
   example_glfw_opengl3.vcxproj -> C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\example_glfw_opengl3.exe

@@ -1,23 +1,7 @@
 #pragma once
 #include "WaveGenerator.h"
+#include "ParameterAutomator.h"
 #include <iostream>
-
-class ParameterAutomator {
-protected:
-    float* target;
-public:
-    ParameterAutomator(float* target)
-        : target(target)
-    {
-    }
-
-    void SetTarget(float *pTarget)
-    {
-        this->target = pTarget;
-    }
-
-    virtual void ApplyAutomation(double time) = 0;
-};
 
 class LFO : public WaveGenerator, public ParameterAutomator {
 private:
@@ -27,8 +11,8 @@ private:
     float freq_hz;
 
 public:
-    LFO(char id, WaveType type, float amplitude, float freq_hz, float* target)
-        : ParameterAutomator(target), WaveGenerator(type, amplitude, 0.0f), freq_hz(freq_hz)
+    LFO(char id, WaveType type, float amplitude, float freq_hz)
+        : ParameterAutomator(), WaveGenerator(type, amplitude, 0.0f), freq_hz(freq_hz)
     {
         this->freq = ToRad(freq_hz);
         this->amplitude *= 0.001f;
@@ -46,14 +30,9 @@ public:
         return this->id;
     }
 
-    virtual void ApplyAutomation(double time)
+    virtual float CalcAutomation(double time)
     {
-        if (this->target == nullptr)
-        {
-            return;
-        }
-        this->freq = ToRad((double)(this->freq_hz));
-        *(this->target) += ProduceWave(time); 
+        return ProduceWave(time); 
     }
  
     void RenderLFO()
@@ -102,11 +81,5 @@ public:
     void AddLFO(LFO* lfo)
     {
         lfos.push_back(lfo);
-    }
-
-    void UpdateLFOs(double time)
-    {
-        for (int i = 0; i < lfos.size(); i++)
-            lfos[i]->ApplyAutomation(time);
     }
 };

@@ -1,5 +1,6 @@
-#pragma once
+#pragma once 
 #include "WaveGenerator.h"
+#include "ModulableField.h"
 #include "LFO.h"
  
 class Oscillator : public WaveGenerator {
@@ -8,13 +9,22 @@ private:
     std::string windowName;
     int MAX_OCTAVE = 5;
 
-    float detune; 
-    int octave; 
- 
+    int octave;
+    ModulableField detune;
+
+    ModFieldList mod_fields;
+    
 public:
-    Oscillator(char id, WaveType type, float amplitude, int octave)
-        : WaveGenerator(type, amplitude, 0.0f), octave(octave), detune(0.0f)
+    void  AddAutomatorDetune(ParameterAutomator* aut)
     {
+        (this->detune).SetAutomator(aut);
+    }
+
+    Oscillator(char id, WaveType type, float amplitude, int octave)
+        : WaveGenerator(type, amplitude, 0.0f), octave(octave),
+          detune("Detune", 0.0f, -1.0f, 1.0f)
+    {
+        mod_fields.AddField(&detune);
         this->SetId(id);
     }
 
@@ -28,17 +38,22 @@ public:
     {
         return this->id;
     }
-
-    const void ApplyDetune(double* note_freq)
-    {
-        *note_freq = *note_freq * pow(2.0f, this->detune / 12.0f);
-    }
-
+ 
     void SetOscFrequencyRad(double frequency)
     {
-        ApplyDetune(&frequency); 
-        this->freq = ToRad(frequency * pow(2, octave));
-    } 
+        this->raw_freq = ToRad(frequency * pow(2, octave));
+    }
+
+    void UpdateFields(double time)
+    {
+        mod_fields.UpdateFields(time);
+    }
+
+    virtual void UpdateParameters(double time)
+    {
+        float detuneValue = (this->detune).GetValue();
+        this->freq = this->raw_freq * pow(2.0f, detuneValue / 12.0f);
+    }
 
     void RenderOsc()
     {
@@ -56,19 +71,9 @@ public:
             0, MAX_OCTAVE, 0.1f, "%i", ImGuiKnobVariant_Stepped,
             0, ImGuiKnobFlags_DragVertical, MAX_OCTAVE + 1); 
         ImGui::SameLine();
-        ImGuiKnobs::Knob("Detune", &(this->detune),
-            -1.0f, 1.0, 0.01f, "%.2f", ImGuiKnobVariant_Wiper,
-            0.0f, ImGuiKnobFlags_DragVertical);
+        detune.RenderField();
         ImGui::End();;
-    }
-
-    float* GetModPointer()
-    {
-        return &(this->detune);
-    }
-
-    friend class ParameterAutomator;
-    friend class LFO;
+    } 
 };
 
 class OscillatorsWindow : public WindowSection {
@@ -122,6 +127,7 @@ public:
         double output = 0.0;
         for (int i = 0; i < oscs.size(); i++)
         {
+            oscs[i]->UpdateFields(time);
             output += (this->oscs[i])->ProduceWave(time);
         }
         return output;
