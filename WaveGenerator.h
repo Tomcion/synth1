@@ -19,8 +19,8 @@ class WaveGenerator {
 protected:
     WaveType type;
 
-    float raw_amplitude;
-    float amplitude; 
+    float amplitude;
+    float phase;
 
     double raw_freq;
     double freq;
@@ -32,8 +32,10 @@ protected:
 
     const double SineWave(double time)
     {
-        double output = sin(freq * time);
-        //double output = sin(freq * time + 0.01 * freq * sin(ToRad(2.0) * time));
+        //double output = sin(freq * time);
+        double message_freq = ToRad(2.0);
+        double freq_dev = freq * (halfToneRatio - 1);
+        double output = sin(freq * time + freq_dev / message_freq * sin(message_freq * time));
         return output * (double)amplitude;
     }
 
@@ -45,7 +47,10 @@ protected:
 
     const double SquareWave(double time)
     {
-        double output = (sin(freq * time) > 0 ? 1.0f : -1.0f);
+        double message_freq = ToRad(2.0);
+        double freq_dev = freq * (halfToneRatio - 1);
+        double output = sin(freq * time + freq_dev / message_freq * sin(message_freq * time)) > 0 ? 1.0f : -1.0f;
+        //double output = (sin(freq * time) > 0 ? 1.0f : -1.0f);
         return output * (double)amplitude;
     }
 
@@ -69,7 +74,7 @@ protected:
 public: 
     WaveGenerator(WaveType type = SINE, float amplitude = 0.3f, float freq = 0.0f)
         : type(type),
-          amplitude(amplitude), raw_amplitude(amplitude),
+          amplitude(amplitude),
           freq(freq), raw_freq(freq)
     {
     } 

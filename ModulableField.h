@@ -38,7 +38,7 @@ public:
 
     float GetValue()
     {
-        return this->raw_value;
+        return this->res_value;
     } 
 
     void RenderField()
@@ -53,6 +53,7 @@ public:
         if (this->automator == nullptr)
             return;
         this->res_value = this->raw_value + (this->automator)->CalcAutomation(time);
+        std::cout << this->res_value << std::endl;
     }
 };
 

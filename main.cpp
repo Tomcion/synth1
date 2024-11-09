@@ -24,6 +24,9 @@
 #include <iostream>
 #include "MasterWindow.h"
 #include "olcNoiseMaker.h"
+
+#define SAMPLE_RATE 44100
+#define BLOCK_SIZE 512
  
 static void glfw_error_callback(int error, const char* description)
 {

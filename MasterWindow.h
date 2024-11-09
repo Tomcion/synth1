@@ -21,10 +21,10 @@ public:
         Oscillator* osc2 = new Oscillator(2, SQUARE, 0.1f, 3);
         oscillatorsWindow.AddOscillator(osc2);
  
-        LFO* lfo1 = new LFO(1, SINE, 0.5f, 1.0f); 
+        LFO* lfo1 = new LFO("LFO Phase", SINE, 0.5f, 1.0f);
         lfosWindow.AddLFO(lfo1);
 
-        LFO* lfo2 = new LFO(2, SINE, 0.5f, 1.0f);
+        LFO* lfo2 = new LFO("LFO Volume", SINE, 0.5f, 1.0f);
         lfosWindow.AddLFO(lfo2);
 
         //osc1->AddAutomatorDetune(lfo1);
