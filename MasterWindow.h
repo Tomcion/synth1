@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <iostream>
 #include "LFO.h"
+#include "PhaseLFO.h"
 #include "Envelope.h"
 #include "Oscillator.h"
 
@@ -15,19 +16,19 @@ public:
     {
         this->name = "Master Window";
 
-        Oscillator* osc1 = new Oscillator(1, TRIANGLE, 0.5f, 2);
-        oscillatorsWindow.AddOscillator(osc1);
-
-        Oscillator* osc2 = new Oscillator(2, SQUARE, 0.1f, 3);
-        oscillatorsWindow.AddOscillator(osc2);
- 
-        LFO* lfo1 = new LFO("LFO Phase", SINE, 0.5f, 1.0f);
+        LFO* lfo1 = new PhaseLFO("LFO Phase", SINE, 2.0f);
         lfosWindow.AddLFO(lfo1);
 
         LFO* lfo2 = new LFO("LFO Volume", SINE, 0.5f, 1.0f);
         lfosWindow.AddLFO(lfo2);
 
-        //osc1->AddAutomatorDetune(lfo1);
+        Oscillator* osc1 = new Oscillator(1, SINE, 0.5f, 2);
+        oscillatorsWindow.AddOscillator(osc1);
+
+        Oscillator* osc2 = new Oscillator(2, SQUARE, 0.1f, 3);
+        oscillatorsWindow.AddOscillator(osc2);
+ 
+        
     }
 
     virtual void RenderWindow()

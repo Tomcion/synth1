@@ -10,8 +10,10 @@ private:
     int MAX_OCTAVE = 5;
 
     int octave;
-    ModulableField detune;
 
+    float raw_freq_rad;
+
+    ModulableField detune; 
     ModFieldList mod_fields;
     
 public:
@@ -41,7 +43,7 @@ public:
  
     void SetOscFrequencyRad(double frequency)
     {
-        this->raw_freq = ToRad(frequency * pow(2, octave));
+        this->raw_freq_rad = ToRad(frequency * pow(2, octave));
     }
 
     void UpdateFields(double time)
@@ -52,7 +54,7 @@ public:
     virtual void UpdateParameters(double time)
     {
         float detuneValue = (this->detune).GetValue();
-        this->freq = this->raw_freq * pow(2.0f, detuneValue / 12.0f);
+        this->freq_rad = this->raw_freq_rad * pow(2.0f, detuneValue / 12.0f);
     }
 
     void RenderOsc()

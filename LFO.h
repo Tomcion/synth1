@@ -4,17 +4,16 @@
 #include <iostream>
 
 class LFO : public WaveGenerator, public ParameterAutomator {
-private:
-    std::string windowName;
-
-    float freq_hz;
+protected:
+    std::string windowName; 
+    float freq_hz; 
 
 public:
     LFO(std::string name, WaveType type, float amplitude, float freq_hz)
         : ParameterAutomator(), WaveGenerator(type, amplitude, 0.0f),
         freq_hz(freq_hz), windowName(name)
     {
-        this->freq = ToRad(freq_hz);
+        this->freq_rad = ToRad(freq_hz);
         this->amplitude *= 0.001f;
     } 
 
