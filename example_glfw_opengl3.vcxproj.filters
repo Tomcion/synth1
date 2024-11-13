@@ -61,9 +61,6 @@
     <ClCompile Include="ParameterAutomator.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="PhaseLFO.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imconfig.h">
@@ -115,9 +112,6 @@
       <Filter>sources</Filter>
     </ClInclude>
     <ClInclude Include="ModulableField.h">
-      <Filter>sources</Filter>
-    </ClInclude>
-    <ClInclude Include="PhaseLFO.h">
       <Filter>sources</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,10 +1,9 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
-#include "LFO.h"
-#include "PhaseLFO.h"
 #include "Envelope.h"
 #include "Oscillator.h"
+#include "LFO.h"
 
 class MasterWindow : public WindowSection {
 private:

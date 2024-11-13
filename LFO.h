@@ -1,7 +1,6 @@
 #pragma once
 #include "WaveGenerator.h"
 #include "ParameterAutomator.h"
-#include <iostream>
 
 class LFO : public WaveGenerator, public ParameterAutomator {
 protected:
@@ -9,64 +8,32 @@ protected:
     float freq_hz; 
 
 public:
-    LFO(std::string name, WaveType type, float amplitude, float freq_hz)
-        : ParameterAutomator(), WaveGenerator(type, amplitude, 0.0f),
-        freq_hz(freq_hz), windowName(name)
-    {
-        this->freq_rad = ToRad(freq_hz);
-        this->amplitude *= 0.001f;
-    } 
+    LFO(std::string name, WaveType type, float amplitude, float freq_hz);
 
-    virtual float CalcAutomation(double time)
-    {
-        return ProduceWave(time); 
-    }
+    float CalcAutomation(double time); 
  
-    void RenderLFO()
-    {
-        ImGui::Begin(windowName.c_str());
-        const char* items[4] = { "Sine", "Triangle", "Square", "Sawtooth"};
-        int selected_item = type;
-        if (ImGui::Combo("Waveform", &selected_item, items, 4))
-            type = (WaveType)selected_item;
-
-        ImGuiKnobs::Knob("Amount", &(this->amplitude),
-            0.0f, 1.0f, 0.01f, "%.2f", ImGuiKnobVariant_Wiper,
-            0.0f, ImGuiKnobFlags_DragVertical);
-        ImGui::SameLine(); 
-
-        ImGuiKnobs::Knob("Freq.", &(this->freq_hz),
-            0.1, 20, 0.1f, "%.2f", ImGuiKnobVariant_Wiper,
-            0.0f, ImGuiKnobFlags_DragVertical);
-
-        ImGui::End();
-    } 
+    void RenderLFO();
 };
+
+
+class PhaseLFO : public LFO {
+public:
+    PhaseLFO(std::string name, float amplitude, float freq_hz);
+
+    float CalcPMAmplitude(double carrier_freq); 
+};
+
  
 class LFOsWindow : public WindowSection {
 private:
     std::vector<LFO*> lfos;
 
 public: 
-    virtual void RenderWindow()
-    {
-        for (int i = 0; i < lfos.size(); i++)
-            lfos[i]->RenderLFO();
-    }
+    virtual void RenderWindow(); 
 
-    LFOsWindow()
-    { 
-        this->name = "LFOs"; 
-    } 
+    LFOsWindow(); 
 
-    ~LFOsWindow()
-    { 
-        for (int i = 0; i < lfos.size(); i++)
-            delete[] lfos[i];
-    } 
+    ~LFOsWindow(); 
 
-    void AddLFO(LFO* lfo)
-    {
-        lfos.push_back(lfo);
-    }
+    void AddLFO(LFO* lfo); 
 };
