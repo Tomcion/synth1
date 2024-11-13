@@ -20,7 +20,7 @@ class PhaseLFO : public LFO {
 public:
     PhaseLFO(std::string name, float amplitude, float freq_hz);
 
-    float CalcPMAmplitude(double carrier_freq); 
+    void CalcPMAmplitude(double carrier_freq); 
 };
 
  

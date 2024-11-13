@@ -45,8 +45,9 @@ void WaveGenerator::UpdatePhase(double time)
 { 
     if (this->PhaseModulator == nullptr)
         return;
-    float amp = (this->PhaseModulator)->CalcPMAmplitude(this->freq_rad);
+    (this->PhaseModulator)->CalcPMAmplitude(this->freq_rad);
     (this->phase).CalcModuletedValue(time);
+
 }
 
 void WaveGenerator::UpdateParameters(double time)

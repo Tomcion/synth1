@@ -38,10 +38,10 @@ PhaseLFO::PhaseLFO(std::string name, float amplitude, float freq_hz)
 { 
 }
 
-float PhaseLFO::CalcPMAmplitude(double carrier_freq)
+void  PhaseLFO::CalcPMAmplitude(double carrier_freq)
 { 
     double freq_dev = carrier_freq * (halfToneRatio - 1);
-    return (float)(freq_dev / this->freq_rad);
+    this->amplitude = (float)(freq_dev / this->freq_rad);
 }
  
 void LFOsWindow::RenderWindow()

@@ -15,7 +15,7 @@ public:
     {
         this->name = "Master Window";
 
-        LFO* lfo1 = new PhaseLFO("LFO Phase", SINE, 2.0f);
+        PhaseLFO* lfo1 = new PhaseLFO("LFO Phase", SINE, 2.0f);
         lfosWindow.AddLFO(lfo1);
 
         LFO* lfo2 = new LFO("LFO Volume", SINE, 0.5f, 1.0f);
@@ -27,7 +27,8 @@ public:
         Oscillator* osc2 = new Oscillator(2, SQUARE, 0.1f, 3);
         oscillatorsWindow.AddOscillator(osc2);
  
-        
+        osc1->SetPhaseModulator(lfo1);
+        osc2->SetPhaseModulator(lfo1);
     }
 
     virtual void RenderWindow()
