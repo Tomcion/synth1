@@ -8,8 +8,6 @@ const double WaveGenerator::ToRad(double n)
 
 const double WaveGenerator::SineWave(double time)
 {
-    double message_freq = ToRad(2.0);
-    double freq_dev = freq_rad * (halfToneRatio - 1);
     double output = sin(freq_rad * time + phase.GetValue());
     return output * (double)amplitude;
 }
@@ -22,10 +20,7 @@ const double WaveGenerator::TriangleWave(double time)
 
 const double WaveGenerator::SquareWave(double time)
 {
-    double message_freq = ToRad(2.0);
-    double freq_dev = freq_rad * (halfToneRatio - 1);
-    double output = sin(freq_rad * time + freq_dev / message_freq * sin(message_freq * time)) > 0 ? 1.0f : -1.0f;
-    //double output = (sin(freq * time) > 0 ? 1.0f : -1.0f);
+    double output = sin(freq_rad * time + phase.GetValue()) > 0 ? 1.0f : -1.0f;
     return output * (double)amplitude;
 }
 

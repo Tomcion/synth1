@@ -12,7 +12,7 @@ public:
 
     float CalcAutomation(double time); 
  
-    void RenderLFO();
+    virtual void RenderLFO();
 };
 
 
@@ -21,6 +21,7 @@ public:
     PhaseLFO(std::string name, float amplitude, float freq_hz);
 
     void CalcPMAmplitude(double carrier_freq); 
+    void RenderLFO() override;
 };
 
  

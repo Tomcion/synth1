@@ -24,6 +24,7 @@ protected:
     PhaseLFO* PhaseModulator;
 
     float amplitude;
+    float amount;
     ModulableField phase;
 
     double freq_rad;

@@ -5,12 +5,13 @@ LFO::LFO(std::string name, WaveType type, float amplitude, float freq_hz)
     freq_hz(freq_hz), windowName(name)
 {
     this->freq_rad = ToRad(freq_hz);
-    this->amplitude *= 0.001f;
+    this->amount = 0.0f;
 } 
 
 float LFO::CalcAutomation(double time)
 {
-    return ProduceWave(time); 
+    this->freq_rad = ToRad(this->freq_hz);
+    return amount * ProduceWave(time); 
 }
 
 void LFO::RenderLFO()
@@ -21,7 +22,7 @@ void LFO::RenderLFO()
     if (ImGui::Combo("Waveform", &selected_item, items, 4))
         type = (WaveType)selected_item;
 
-    ImGuiKnobs::Knob("Amount", &(this->amplitude),
+    ImGuiKnobs::Knob("Amount", &(this->amount),
         0.0f, 1.0f, 0.01f, "%.2f", ImGuiKnobVariant_Wiper,
         0.0f, ImGuiKnobFlags_DragVertical);
     ImGui::SameLine(); 
@@ -43,6 +44,22 @@ void  PhaseLFO::CalcPMAmplitude(double carrier_freq)
     double freq_dev = carrier_freq * (halfToneRatio - 1);
     this->amplitude = (float)(freq_dev / this->freq_rad);
 }
+
+void PhaseLFO::RenderLFO()
+{
+    ImGui::Begin(windowName.c_str());
+
+    ImGuiKnobs::Knob("Amount", &(this->amount),
+        0.0f, 1.0f, 0.01f, "%.2f", ImGuiKnobVariant_Wiper,
+        0.0f, ImGuiKnobFlags_DragVertical);
+    ImGui::SameLine(); 
+
+    ImGuiKnobs::Knob("Freq.", &(this->freq_hz),
+        0.1, 20, 0.1f, "%.2f", ImGuiKnobVariant_Wiper,
+        0.0f, ImGuiKnobFlags_DragVertical);
+
+    ImGui::End();
+} 
  
 void LFOsWindow::RenderWindow()
 {
