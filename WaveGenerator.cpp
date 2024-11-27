@@ -14,7 +14,7 @@ const double WaveGenerator::SineWave(double time)
 
 const double WaveGenerator::TriangleWave(double time)
 {
-    double output = (2.0f / PI) * asin(sin(freq_rad * time));
+    double output = (2.0f / PI) * asin(sin(freq_rad * time + phase.GetValue()));
     return output * (double)amplitude;
 }
 
@@ -26,7 +26,7 @@ const double WaveGenerator::SquareWave(double time)
 
 const double WaveGenerator::SawtoothWave(double time)
 {
-    double output = (2.0f / PI) * (freq_rad * PI * fmod(time, 1.0 / freq_rad) - (PI / 2.0));
+    double output = (2.0f / PI) * (freq_rad * PI * fmod(time + phase.GetValue(), 1.0 / freq_rad) - (PI / 2.0));
     return output * (double)amplitude;
 } 
 
