@@ -1,5 +1,4 @@
 #include "Envelope.h"
-#include <iostream>
 
 float Envelope::ProcessNoteOn(double time)
 { 
@@ -12,14 +11,10 @@ float Envelope::ProcessNoteOff(double time)
         return 1;
     if (time > noteOffTime + release)
         return 0;
-    if (time > noteOffTime && noteOffTime > noteOnTime)
+    if (noteOffTime > noteOnTime)
         return 1 - (time - noteOffTime) / release;
     else
-    {
-        //std::cout << noteOnTime << " " << noteOfftime << std::endl;
-        //std::cout << time << " " << noteOffTime + release << std::endl;
         return 0;
-    }
 }
 
 Envelope::Envelope(float attack, float decay, float sustain, float release)

@@ -1,4 +1,4 @@
 ﻿  Envelope.cpp
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(4,38): warning C4100: 'time': unreferenced formal parameter
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(16,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(3,38): warning C4100: 'time': unreferenced formal parameter
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(15,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   example_glfw_opengl3.vcxproj -> C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\example_glfw_opengl3.exe
