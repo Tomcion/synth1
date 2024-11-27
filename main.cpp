@@ -132,7 +132,7 @@ int main(int, char**)
         //    ImGui::ShowDemoWindow(&show_demo_window);
 
         masterWindow.RenderWindow();
-        masterWindow.ProcessNotes(notePressed, currentNote); 
+        masterWindow.ProcessNotes(notePressed, currentNote, sound.GetTime()); 
  
         // Rendering
         ImGui::Render();

@@ -10,6 +10,8 @@ private:
     OscillatorsWindow oscillatorsWindow;
     EnvelopesWindow envelopesWindow;
     LFOsWindow lfosWindow;
+
+    Envelope* masterEnvelope;
 public:
     MasterWindow()
     {
@@ -17,6 +19,9 @@ public:
 
         PhaseLFO* lfo1 = new PhaseLFO("LFO Phase", SINE, 2.0f);
         lfosWindow.AddLFO(lfo1);
+
+        masterEnvelope = new Envelope(0.0f, 0.0f, 0.0f, 3.0f);
+        envelopesWindow.AddEnvelope(masterEnvelope);
 
         LFO* lfo2 = new LFO("LFO Volume", SINE, 0.5f, 1.0f);
         lfosWindow.AddLFO(lfo2);
@@ -42,10 +47,11 @@ public:
     double MixSound(double time)
     {
         double output = oscillatorsWindow.MixOscillators(time);
+        output *= masterEnvelope->CalcAutomation(time);
         return output;
     }
  
-    void ProcessNotes(bool& notePressed, int currentNote)
+    void ProcessNotes(bool& notePressed, int& currentNote, double time)
     {
 		notePressed = false;
 		for (int k = 0; k < 16; k++)
@@ -54,8 +60,9 @@ public:
 			{
 				if (currentNote != k)
 				{					
-                    std::cout << "key down " << k << std::endl;
+                    //std::cout << "key down " << k << std::endl;
                     oscillatorsWindow.SetNoteFrequency(k);
+                    envelopesWindow.SetNoteOnTime(time);
 					currentNote = k;
 				}
 
@@ -67,12 +74,12 @@ public:
 		{	
 			if (currentNote != -1)
 			{
-                // release
-                std::cout << "note released\n";
+                //std::cout << "note released\n";
+                envelopesWindow.SetNoteOffTime(time);
 				currentNote = -1;
 			}
 
-            oscillatorsWindow.SetNoteFrequency(-1);
+            //oscillatorsWindow.SetNoteFrequency(-1);
 		}
     }
 };
