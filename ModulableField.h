@@ -51,8 +51,9 @@ public:
     void CalcModuletedValue(double time)
     {
         if (this->automator == nullptr)
-            return;
-        this->res_value = this->raw_value + (this->automator)->CalcAutomation(time);
+            this->res_value = this->raw_value;
+        else
+            this->res_value = this->raw_value + (this->automator)->CalcAutomation(time);
     }
 };
 
