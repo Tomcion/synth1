@@ -1,14 +1,13 @@
 #include "Envelope.h"
+#include <iostream>
 
 float Envelope::ProcessNoteOn(double time)
 { 
     double attackEnd = noteOnTime + attack;
     double decayEnd = attackEnd + decay;
 
-    if (noteOnTime < noteOffTime)
-        return sustain;
-    if (time < attackEnd)
-        return (time - noteOnTime) / attack; 
+    if (time < attackEnd) 
+        return (time - noteOnTime) / attack;
     if (time >= attackEnd && time <= decayEnd)
         return 1 - ((time - attackEnd) * (1 - sustain)) / decay; 
     return sustain;
@@ -31,10 +30,11 @@ Envelope::Envelope(float attack, float decay, float sustain, float release)
 { 
     noteOnTime = 0.0f;
     noteOffTime = 0.0f;
+    cur_value = 0.0f;
 }
 
 float Envelope::CalcAutomation(double time)
-{
+{ 
     return ProcessNoteOn(time) * ProcessNoteOff(time);
 }
 

@@ -1,5 +1,5 @@
 ﻿  Envelope.cpp
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(11,36): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(13,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(24,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(10,36): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(12,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Envelope.cpp(23,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   example_glfw_opengl3.vcxproj -> C:\Users\tymon\synth\imgui\examples\example_glfw_opengl3\Debug\example_glfw_opengl3.exe

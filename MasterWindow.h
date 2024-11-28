@@ -20,7 +20,7 @@ public:
         PhaseLFO* lfo1 = new PhaseLFO("LFO Phase", SINE, 2.0f);
         lfosWindow.AddLFO(lfo1);
 
-        masterEnvelope = new Envelope(0.0f, 0.0f, 0.0f, 3.0f);
+        masterEnvelope = new Envelope(0.2f, 0.5f, 0.3f, 3.0f);
         envelopesWindow.AddEnvelope(masterEnvelope);
 
         LFO* lfo2 = new LFO("LFO Volume", SINE, 0.5f, 1.0f);
