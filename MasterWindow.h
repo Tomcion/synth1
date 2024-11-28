@@ -5,6 +5,7 @@
 #include "Oscillator.h"
 #include "LFO.h"
 #include "Saturator.h"
+#include "Filter.h"
 
 class MasterWindow : public WindowSection {
 private:
@@ -14,6 +15,7 @@ private:
 
     Envelope* masterEnvelope;
     Saturator* saturator;
+    Biquad* filter;
 public:
     MasterWindow()
     {
@@ -38,6 +40,9 @@ public:
         envelopesWindow.AddEnvelope(masterEnvelope);
 
         saturator = new Saturator(1.0f);
+
+        filter = new Biquad();
+        filter->setBiquad(bq_type_lowpass, 0.3, 0.707, 0);
  
         osc1->SetPhaseModulator(lfo1);
         osc2->SetPhaseModulator(lfo1);
@@ -50,12 +55,14 @@ public:
         envelopesWindow.RenderWindow();
         lfosWindow.RenderWindow();
         saturator->Render();
+        filter->RenderFilter();
     }
 
     double MixSound(double time)
     {
         double output = oscillatorsWindow.MixOscillators(time);
         output *= masterEnvelope->CalcAutomation(time);
+        output = filter->process(output);
         output = saturator->Saturate(output);
         return output;
     }
