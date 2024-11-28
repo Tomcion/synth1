@@ -30,7 +30,6 @@ Envelope::Envelope(float attack, float decay, float sustain, float release)
 { 
     noteOnTime = 0.0f;
     noteOffTime = 0.0f;
-    cur_value = 0.0f;
 }
 
 float Envelope::CalcAutomation(double time)
