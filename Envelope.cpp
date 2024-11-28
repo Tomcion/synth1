@@ -15,6 +15,7 @@ float Envelope::ProcessNoteOn(double time)
 
 float Envelope::ProcessNoteOff(double time)
 {
+    // TODO: slychac pop jak sustain i release sa 0
     if (noteOnTime > noteOffTime)
         return 1;
     if (time > noteOffTime + release)

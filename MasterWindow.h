@@ -4,6 +4,7 @@
 #include "Envelope.h"
 #include "Oscillator.h"
 #include "LFO.h"
+#include "Saturator.h"
 
 class MasterWindow : public WindowSection {
 private:
@@ -12,6 +13,7 @@ private:
     LFOsWindow lfosWindow;
 
     Envelope* masterEnvelope;
+    Saturator* saturator;
 public:
     MasterWindow()
     {
@@ -19,10 +21,7 @@ public:
 
         PhaseLFO* lfo1 = new PhaseLFO("LFO Phase", SINE, 2.0f);
         lfosWindow.AddLFO(lfo1);
-
-        masterEnvelope = new Envelope(0.2f, 0.5f, 0.3f, 3.0f);
-        envelopesWindow.AddEnvelope(masterEnvelope);
-
+ 
         LFO* lfo2 = new LFO("LFO Volume", SINE, 0.5f, 1.0f);
         lfosWindow.AddLFO(lfo2);
 
@@ -31,6 +30,14 @@ public:
 
         Oscillator* osc2 = new Oscillator(2, SQUARE, 0.1f, 3);
         oscillatorsWindow.AddOscillator(osc2);
+
+        Oscillator* osc3 = new Oscillator(3, NOISE, 0.05f, 3);
+        oscillatorsWindow.AddOscillator(osc3);
+
+        masterEnvelope = new Envelope(0.0f, 0.5f, 0.3f, 3.0f);
+        envelopesWindow.AddEnvelope(masterEnvelope);
+
+        saturator = new Saturator(1.0f);
  
         osc1->SetPhaseModulator(lfo1);
         osc2->SetPhaseModulator(lfo1);
@@ -42,12 +49,14 @@ public:
         oscillatorsWindow.RenderWindow();
         envelopesWindow.RenderWindow();
         lfosWindow.RenderWindow();
+        saturator->Render();
     }
 
     double MixSound(double time)
     {
         double output = oscillatorsWindow.MixOscillators(time);
         output *= masterEnvelope->CalcAutomation(time);
+        output = saturator->Saturate(output);
         return output;
     }
  

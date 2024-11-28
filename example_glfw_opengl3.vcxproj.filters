@@ -61,6 +61,12 @@
     <ClCompile Include="ParameterAutomator.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="Saturator.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\imconfig.h">
@@ -112,6 +118,12 @@
       <Filter>sources</Filter>
     </ClInclude>
     <ClInclude Include="ModulableField.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Saturator.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
       <Filter>sources</Filter>
     </ClInclude>
   </ItemGroup>

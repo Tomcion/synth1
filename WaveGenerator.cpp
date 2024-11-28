@@ -32,8 +32,9 @@ const double WaveGenerator::SawtoothWave(double time)
 
 const double WaveGenerator::WhiteNoise(double time)
 {
-    double output = sin(freq_rad * time);
-    return output * (double)amplitude;
+    double random = (float)rand() / (float)RAND_MAX;
+
+    return ((random * 2.0f) - 1.0f) * (double)amplitude;
 } 
 
 void WaveGenerator::UpdatePhase(double time)

@@ -43,9 +43,9 @@ void Oscillator::UpdateParameters(double time)
 void Oscillator::RenderOsc()
 {
     ImGui::Begin(windowName.c_str());
-    const char* items[4] = { "Sine", "Triangle", "Square", "Sawtooth"};
+    const char* items[5] = { "Sine", "Triangle", "Square", "Sawtooth", "White Noise"};
     int selected_item = type;
-    if (ImGui::Combo("Waveform", &selected_item, items, 4))
+    if (ImGui::Combo("Waveform", &selected_item, items, 5))
         type = (WaveType)selected_item;
 
     ImGuiKnobs::Knob("Level", &(this->amplitude),

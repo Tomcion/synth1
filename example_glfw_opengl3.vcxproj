@@ -167,6 +167,7 @@
     <ClCompile Include="..\..\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="..\..\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Envelope.cpp" />
+    <ClCompile Include="Filter.cpp" />
     <ClCompile Include="imgui-knobs.cpp" />
     <ClCompile Include="LFO.cpp" />
     <ClCompile Include="main.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="ModulableField.cpp" />
     <ClCompile Include="Oscillator.cpp" />
     <ClCompile Include="ParameterAutomator.cpp" />
+    <ClCompile Include="Saturator.cpp" />
     <ClCompile Include="WaveGenerator.cpp" />
     <ClCompile Include="WindowSection.cpp" />
   </ItemGroup>
@@ -185,6 +187,7 @@
     <ClInclude Include="..\..\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="..\..\backends\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="Envelope.h" />
+    <ClInclude Include="Filter.h" />
     <ClInclude Include="imgui-knobs.h" />
     <ClInclude Include="LFO.h" />
     <ClInclude Include="MasterWindow.h" />
@@ -193,6 +196,7 @@
     <ClInclude Include="olcNoiseMakerOld.h" />
     <ClInclude Include="Oscillator.h" />
     <ClInclude Include="ParameterAutomator.h" />
+    <ClInclude Include="Saturator.h" />
     <ClInclude Include="WaveGenerator.h" />
     <ClInclude Include="WindowSection.h" />
   </ItemGroup>

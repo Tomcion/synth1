@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 const double halfToneRatio = pow(2.0, 1.0 / 12.0);
 
