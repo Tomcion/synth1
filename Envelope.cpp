@@ -2,7 +2,16 @@
 
 float Envelope::ProcessNoteOn(double time)
 { 
-    return 1;
+    double attackEnd = noteOnTime + attack;
+    double decayEnd = attackEnd + decay;
+
+    if (noteOnTime < noteOffTime)
+        return sustain;
+    if (time < attackEnd)
+        return (time - noteOnTime) / attack; 
+    if (time >= attackEnd && time <= decayEnd)
+        return 1 - ((time - attackEnd) * (1 - sustain)) / decay; 
+    return sustain;
 }
 
 float Envelope::ProcessNoteOff(double time)
